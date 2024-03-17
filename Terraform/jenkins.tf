@@ -6,7 +6,7 @@ resource "aws_instance" "jenkins" {
   security_groups      = ["${aws_security_group.jenkins.id}"]
   key_name             = var.ssh_key
   iam_instance_profile = aws_iam_instance_profile.eks-profile.name
-  user_data = "${file("jenkins.sh")}"
+  user_data            = file("jenkins.sh")
   tags = {
     Name = "Jenkins-Server"
   }

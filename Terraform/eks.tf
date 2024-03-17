@@ -25,7 +25,7 @@ resource "aws_eks_node_group" "worker-node-group" {
     aws_subnet.private_subnet[1].id,
     aws_subnet.private_subnet[2].id
   ]
-  instance_types = [var.aws_instance]
+  instance_types = [var.worker_node_instance]
   capacity_type  = "ON_DEMAND"
   remote_access {
     ec2_ssh_key               = var.ssh_key
@@ -41,10 +41,10 @@ resource "aws_eks_node_group" "worker-node-group" {
     max_unavailable = 1
   }
 
-tags = {
+  tags = {
     Name = "EKS Worker Node"
   }
-  
+
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,

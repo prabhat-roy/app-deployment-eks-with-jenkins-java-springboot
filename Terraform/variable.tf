@@ -23,6 +23,9 @@ variable "azs" {
 variable "aws_instance" {
   type = string
 }
+variable "worker_node_instance" {
+  type = string
+}
 variable "aws_ami" {
   type = string
 }
