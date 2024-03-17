@@ -11,7 +11,7 @@ resource "aws_security_group" "jenkins" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["49.37.32.196/32"]
+    cidr_blocks = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
   }
 
   ingress {
@@ -43,7 +43,7 @@ resource "aws_security_group" "sonar" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["49.37.32.196/32"]
+    cidr_blocks = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
   }
 
   ingress {

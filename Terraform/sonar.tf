@@ -6,12 +6,12 @@ resource "aws_instance" "sonar" {
   availability_zone = var.azs[0]
   security_groups   = ["${aws_security_group.jenkins.id}"]
   key_name          = var.ssh_key
-  #  user_data = "${file("sonar.sh")}"
+  user_data = "${file("sonar.sh")}"
   tags = {
     Name = "Sonarqube-Server"
   }
 }
-
+/*
 resource "null_resource" "sonarqube-server" {
   connection {
     type        = "ssh"
@@ -31,3 +31,4 @@ resource "null_resource" "sonarqube-server" {
   }
   depends_on = [aws_instance.sonar]
 }
+*/
