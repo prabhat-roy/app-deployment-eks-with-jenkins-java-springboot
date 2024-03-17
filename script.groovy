@@ -26,7 +26,11 @@ def buildapplication() {
     sh "mvn clean install"
 }
 def dockerbuild() {
-        sh "docker build . -t ${IMAGE_NAME}:${BUILD_NUMBER}"
+        steps {
+            script {
+                dockerImage = docker.Build.registry
+            }
+        }
 }
 def trivyimage() {
         sh "trivy image ${IMAGE_NAME}:${BUILD_NUMBER}"
@@ -40,15 +44,14 @@ def syft() {
         sh "syft ${IMAGE_NAME}:${BUILD_NUMBER}"       
 }
 def ecr() {
-    
+    steps{  
+         script {
+                sh 'aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com'
+                sh 'docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}'
+         }
+        }
 }
 
-def dockerrun() {
-    sh '''
-        docker run -dt ${IMAGE_NAME}:${BUILD_NUMBER}"
-        docker stop ${IMAGE_NAME}:${BUILD_NUMBER}"
-        '''
-}
 def dockerscout() {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"

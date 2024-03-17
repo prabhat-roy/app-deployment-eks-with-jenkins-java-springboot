@@ -2,12 +2,13 @@ def gv_script
 pipeline {
     agent any
     environment {
+        registry = "873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo"
         IMAGE_NAME = ""
         GITHUB_URL = "https://github.com/prabhat-roy/app-deployment-eks-with-jenkins-java-springboot.git"
     }
     tools {
         jdk 'Java'
-        maven 'Maven'
+        maven 'Maven3'
     }
     stages {
         stage("Init") {
