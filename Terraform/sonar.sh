@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo hostnamectl set-hostname sonar
 sudo apt-get update -y
 sudo apt-get install unzip openjdk-17-jdk -y
