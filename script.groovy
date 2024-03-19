@@ -26,9 +26,7 @@ def buildapplication() {
     sh "mvn clean install"
 }
 def dockerbuild() {
-        steps {
-            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
-        }
+    sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
 }
 def trivyimage() {
         sh "trivy image ${IMAGE_NAME}:${BUILD_NUMBER}"
