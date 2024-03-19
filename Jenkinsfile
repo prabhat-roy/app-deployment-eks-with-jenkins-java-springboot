@@ -39,24 +39,31 @@ pipeline {
                 }
             }
         }
-                stage("SonarQube Analysis") {
+        stage("SonarQube Analysis") {
             steps {
                 script {
                     gv_script.sonaranalysis()
                 }
             }
         }
-                stage("Trivy FS Scan") {
+        stage("Trivy FS Scan") {
             steps {
                 script {
                     gv_script.trivyfs()
                 }
             }
         }
-                stage("Code Compile") {
+        stage("Code Compile") {
             steps {
                 script {
                     gv_script.codecompile()
+                }
+            }
+        }
+        stage("Building Application") {
+            steps {
+                script {
+                    gv_script.buildapplication()
                 }
             }
         }
