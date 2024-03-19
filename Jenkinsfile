@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         registry = "873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo"
-        IMAGE_NAME = $registry
+        IMAGE_NAME = "873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo"
         GITHUB_URL = "https://github.com/prabhat-roy/app-deployment-eks-with-jenkins-java-springboot.git"
     }
     tools {
