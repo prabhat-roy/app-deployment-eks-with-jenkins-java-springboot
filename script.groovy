@@ -27,9 +27,7 @@ def buildapplication() {
 }
 def dockerbuild() {
         steps {
-            script {
-                dockerImage = docker.Build.registry
-            }
+            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
         }
 }
 def trivyimage() {
