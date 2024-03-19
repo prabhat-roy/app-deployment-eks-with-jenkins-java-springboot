@@ -53,6 +53,13 @@ pipeline {
                 }
             }
         }
+                stage("Code Compile") {
+            steps {
+                script {
+                    gv_script.codecompile()
+                }
+            }
+        }
     }
     post {
         always {
