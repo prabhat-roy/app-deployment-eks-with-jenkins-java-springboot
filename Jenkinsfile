@@ -39,6 +39,13 @@ pipeline {
                 }
             }
         }
+                stage("SonarQube Analysis") {
+            steps {
+                script {
+                    gv_script.sonaranalysis()
+                }
+            }
+        }
     }
     post {
         always {
