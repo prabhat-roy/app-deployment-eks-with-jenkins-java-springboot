@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         registry = "873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo"
-        IMAGE_NAME = ""
+        IMAGE_NAME = $registry
         GITHUB_URL = "https://github.com/prabhat-roy/app-deployment-eks-with-jenkins-java-springboot.git"
     }
     tools {
@@ -32,97 +32,7 @@ pipeline {
                 }
             }
         }
-        stage("OWASP FS Scan") {
-            steps {
-                script {
-                    gv_script.owasp()
-                }
-            }
-        }
-        stage("SonarQube Analysis") {
-            steps {
-                script {
-                    gv_script.sonaranalysis()
-                }
-            }
-        }
-        stage("Trivy FS Scan") {
-            steps {
-                script {
-                    gv_script.trivyfs()
-                }
-            }
-        }
-        stage("Code Compile") {
-            steps {
-                script {
-                    gv_script.codecompile()
-                }
-            }
-        }
-        stage("Building Application") {
-            steps {
-                script {
-                    gv_script.buildapplication()
-                }
-            }
-        }
-        stage("Docker Build") {
-            steps {
-                script {
-                    gv_script.dockerbuild()
-                }
-            }
-        }
-        stage("Trivy Image Scan") {
-            steps {
-                script {
-                    gv_script.trivyimage()
-                }
-            }
-        }
-        stage("Docker Scout Image Scan") {
-            steps {
-                script {
-                    gv_script.dockerscout()
-                }
-            }
-        }
-        stage("Grype Image Scan") {
-            steps {
-                script {
-                    gv_script.grype()
-                }
-            }
-        }
-        stage("Syft Image Scan") {
-            steps {
-                script {
-                    gv_script.syft()
-                }
-            }
-        }
-        stage("Docker Push ECR") {
-            steps {
-                script {
-                    gv_script.ecr()
-                }
-            }
-        }
-        stage("Deployment to K8s") {
-            steps {
-                script {
-                    gv_script.kubernetes()
-                }
-            }
-        }
-        stage("Container Removal") {
-            steps {
-                script {
-                    gv_script.removedocker()
-                }
-            }
-        }
+        
     }
     post {
         always {

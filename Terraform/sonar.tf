@@ -4,7 +4,7 @@ resource "aws_instance" "sonar" {
   instance_type     = var.aws_instance
   subnet_id         = aws_subnet.public_subnet[0].id
   availability_zone = var.azs[0]
-  security_groups   = ["${aws_security_group.jenkins.id}"]
+  security_groups   = ["${aws_security_group.sonar.id}"]
   key_name          = var.ssh_key
   user_data = "${file("sonar.sh")}"
   tags = {
