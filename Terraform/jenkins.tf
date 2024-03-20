@@ -7,6 +7,11 @@ resource "aws_instance" "jenkins" {
   key_name             = var.ssh_key
   iam_instance_profile = aws_iam_instance_profile.eks-profile.name
   user_data            = file("jenkins.sh")
+  root_block_device {
+    volume_size = "20"
+    volume_type = "gp3"
+    delete_on_termination = true
+  }
   tags = {
     Name = "Jenkins-Server"
   }

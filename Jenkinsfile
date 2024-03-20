@@ -32,13 +32,7 @@ pipeline {
                 }
             }
         }
-        stage("OWASP FS Scan") {
-            steps {
-                script {
-                    gv_script.owasp()
-                }
-            }
-        }
+        
         stage("SonarQube Analysis") {
             steps {
                 script {
@@ -74,10 +68,31 @@ pipeline {
                 }
             }
         }
-                stage("Trivy Image Scan") {
+        stage("Trivy Image Scan") {
             steps {
                 script {
                     gv_script.trivyimage()
+                }
+            }
+        }
+        stage("Docker Scout Image Scan") {
+            steps {
+                script {
+                    gv_script.dockerscout()
+                }
+            }
+        }
+        stage("Grype Image Scan") {
+            steps {
+                script {
+                    gv_script.grype()
+                }
+            }
+        }
+        stage("Syft Image Scan") {
+            steps {
+                script {
+                    gv_script.syft()
                 }
             }
         }

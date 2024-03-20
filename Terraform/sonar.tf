@@ -7,6 +7,11 @@ resource "aws_instance" "sonar" {
   security_groups   = ["${aws_security_group.sonar.id}"]
   key_name          = var.ssh_key
   user_data = "${file("sonar.sh")}"
+   root_block_device {
+    volume_size = "20"
+    volume_type = "gp3"
+    delete_on_termination = true
+  }
   tags = {
     Name = "Sonarqube-Server"
   }
