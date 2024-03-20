@@ -40,12 +40,9 @@ def syft() {
         sh "syft ${IMAGE_NAME}:${BUILD_NUMBER}"       
 }
 def ecr() {
-    steps{  
-         script {
-                sh 'aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com'
-                sh 'docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}'
-         }
-        }
+                sh "aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com"
+                sh "docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}"
+        
 }
 
 def dockerscout() {
