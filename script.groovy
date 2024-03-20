@@ -59,9 +59,7 @@ def dockerscout() {
 
 def kubernetes() {
                  sshagent(['k8s']) {
-                        sh "scp -o StrictHostKeyChecking=no service.yml nexus-deployment.yml dockerhub-deployment.yml root@'${K8S_MASTER_IP}':/root"
-                        sh "ssh root@'${K8S_MASTER_IP}' kubectl apply -f ."
-                        sh "ssh root@'${K8S_MASTER_IP}' rm -rf *.yml"
+                       
         }
 }
 
