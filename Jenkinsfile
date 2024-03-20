@@ -96,6 +96,13 @@ pipeline {
                 }
             }
         }
+        stage("Docker Push ECR") {
+            steps {
+                script {
+                    gv_script.ecr()
+                }
+            }
+        }
     }
     post {
         always {
