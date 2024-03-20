@@ -15,7 +15,8 @@ resource "aws_route_table" "private_rt" {
   count  = length(var.private_subnet_cidrs)
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.ngw[count.index].id
+    gateway_id = aws_internet_gateway.igw.id
+#    gateway_id = aws_nat_gateway.ngw[count.index].id
   }
 
   tags = {

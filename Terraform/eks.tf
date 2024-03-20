@@ -29,11 +29,11 @@ resource "aws_eks_node_group" "worker-node-group" {
   capacity_type  = "ON_DEMAND"
   remote_access {
     ec2_ssh_key               = var.ssh_key
-    source_security_group_ids = [aws_security_group.jenkins.id]
+    source_security_group_ids = [aws_security_group.worker-node.id]
   }
 
   scaling_config {
-    desired_size = 3
+    desired_size = 1
     max_size     = 5
     min_size     = 1
   }

@@ -61,3 +61,35 @@ resource "aws_security_group" "sonar" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
+
+resource "aws_security_group" "worker-node" {
+  vpc_id      = aws_vpc.aws_vpc.id
+  name        = "EKS Worker Node SG"
+  description = "Allow EKS Traffic"
+
+  tags = {
+    Name = "EKS Worker Node SG"
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.aws_vpc_cidr]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
