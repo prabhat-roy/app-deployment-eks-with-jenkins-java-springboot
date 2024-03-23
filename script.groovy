@@ -40,8 +40,8 @@ def syft() {
         sh "syft ${IMAGE_NAME}:${BUILD_NUMBER}"       
 }
 def ecr() {
-                sh "aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com"
-                sh "docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}"
+        sh "aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com"
+        sh "docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}"
         
 }
 
@@ -55,9 +55,10 @@ def dockerscout() {
 }
 
 def kubernetes() {
-                 sshagent(['k8s']) {
-                       
-        }
+        sh "helm ls"
+        sh "helm upgrade first-helm --install helm-chart --set image.tag=$BUILD_NUMBER"
+        sh "kubectl get svc"
+        sh "kubectl get pods"
 }
 
 def removedocker() {

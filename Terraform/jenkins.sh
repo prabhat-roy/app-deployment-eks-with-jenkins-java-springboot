@@ -47,7 +47,7 @@ sudo unzip awscliv2.zip
 sudo ./aws/install
 # sudo adduser jenkins --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 # sudo echo jenkins:jenkins | sudo chpasswd
-sudo usermod -aG root jenkins
+sudo usermod -aG sudo jenkins
 sudo usermod -aG docker jenkins
 sudo wget https://get.helm.sh/helm-v3.9.3-linux-amd64.tar.gz
 sudo tar xvf helm-v3.9.3-linux-amd64.tar.gz
