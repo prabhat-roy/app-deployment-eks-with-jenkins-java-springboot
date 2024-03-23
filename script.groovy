@@ -63,7 +63,6 @@ def kubernetes() {
 
 def removedocker() {
                 sh "docker rmi -f ${IMAGE_NAME}:${BUILD_NUMBER}"
-                sh "docker rmi -f owasp/zap2docker-stable"
                 sh "docker system prune --force --all"
                 sh "docker system prune --force --all --volumes"
 }

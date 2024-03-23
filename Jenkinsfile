@@ -109,6 +109,13 @@ pipeline {
                 }
             }
         }
+        stage("Helm Deploy") {
+            steps {
+                script {
+                    gv_script.kubernetes()
+                }
+            }
+        }
     }
     post {
         always {
