@@ -45,11 +45,10 @@ def ecr() {
 }        
 def dockerhub() {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-               sh "docker image tag ${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-               sh "docker push ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
-               sh "docker pull ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
-               sh "docker rmi -f ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker pull ${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker rmi -f ${IMAGE_NAME}:${BUILD_NUMBER}"
     }
 }
 
