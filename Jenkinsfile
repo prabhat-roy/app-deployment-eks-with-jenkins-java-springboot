@@ -116,6 +116,13 @@ pipeline {
                 }
             }
         }
+        stage("Docker Image Cleanup") {
+            steps {
+                script {
+                    gv_script.removedocker()
+                }
+            }
+        }
     }
     post {
         always {
