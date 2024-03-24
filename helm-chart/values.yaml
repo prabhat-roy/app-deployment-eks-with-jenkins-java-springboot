@@ -5,12 +5,12 @@
 replicaCount: 3
 
 image:
-  repository: 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo
+  repository: 
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-imagePullSecrets: []
+imagePullSecrets: [regcred]
 nameOverride: ""
 fullnameOverride: ""
 

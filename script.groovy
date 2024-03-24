@@ -42,7 +42,15 @@ def syft() {
 def ecr() {
         sh "aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 873330726955.dkr.ecr.ap-south-2.amazonaws.com"
         sh "docker push 873330726955.dkr.ecr.ap-south-2.amazonaws.com/test-repo:${BUILD_NUMBER}"
-        
+}        
+def dockerhub() {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+               sh "docker image tag ${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+               sh "docker push ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker pull ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+               sh "docker rmi -f ${DOCKERHUB_NAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+    }
 }
 
 def dockerscout() {
