@@ -31,3 +31,4 @@ Steps:
 •	sudo systemctl start sonar
 
 14.	Create a Jenkins pipeline and jenkinsfile is located at https://github.com/prabhat-roy/app-deployment-eks-with-jenkins-java-springboot.git. Also configure github webhook to run Jenkins automatically whenever there is a change in github.
+15. 
