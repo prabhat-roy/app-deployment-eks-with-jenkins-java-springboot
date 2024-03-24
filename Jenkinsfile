@@ -102,10 +102,10 @@ pipeline {
                 }
             }
         }
-        stage("Docker Push ECR") {
+        stage("Docker Push Dockerhub") {
             steps {
                 script {
-                    gv_script.ecr()
+                    gv_script.dockerhub()
                 }
             }
         }
