@@ -5,13 +5,13 @@ Steps:
 3.	Create the required resources using terrafom which is located in the terraform folder.
 4.	Login to jenkins server using cli and go to root user
 5.	Add the jenkins user to sudo group by editing the file /etc/sudoers and add the below text into that
-•	ubuntu ALL=(ALL:ALL) ALL
+•	ubuntu ALL=(ALL) NOPASSWD:ALL
 6.	Add the jenkins user into the docker group using the below command
 •	sudo usermod -aG docker jenkins
 7.	switch to jenkins user and login to docker hub for docker scout
 8.	Enter the below command to configure docker scout
-•	sudo curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-•	sudo sh install-scout.sh
+•	curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+•	sh install-scout.sh
 9.	login to aws cli using credential created step 1.
 10.	Update Kube config by entering below command to get kubernetes credentails:
 •	aws eks update-kubeconfig --name test-eks-cluster --region ap-south-2
